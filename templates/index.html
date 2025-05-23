@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>House Price Predictor</title>
+
+  <!-- Bootstrap CSS CDN -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+</head>
+<body>
+  <div class="container my-5">
+    <h1 class="mb-4 text-center">House Price Predictor</h1>
+
+    <form method="POST" class="needs-validation" novalidate>
+      <div class="row g-3">
+        <div class="col-md-6">
+          <label for="type_area" class="form-label">Type Area</label>
+          <select class="form-select" name="type_area" id="type_area" required>
+            <option value="" disabled selected>Select Type Area</option>
+            <option value="Carpet Area">Carpet Area</option>
+            <option value="Super Area">Super Area</option>
+          </select>
+          <div class="invalid-feedback">Please select a Type Area.</div>
+        </div>
+
+        <div class="col-md-6">
+          <label for="value_area" class="form-label">Value Area</label>
+          <input class="form-control" type="number" step="0.01" name="value_area" id="value_area" required />
+          <div class="invalid-feedback">Please enter the Value Area.</div>
+        </div>
+
+        <div class="col-md-6">
+          <label for="floor" class="form-label">Floor</label>
+          <input class="form-control" type="number" name="floor" id="floor" required />
+          <div class="invalid-feedback">Please enter the Floor number.</div>
+        </div>
+
+        <div class="col-md-6">
+          <label for="transaction" class="form-label">Transaction</label>
+          <select class="form-select" name="transaction" id="transaction" required>
+            <option value="" disabled selected>Select Transaction</option>
+            <option value="New Property">New Property</option>
+            <option value="Resale">Resale</option>
+          </select>
+          <div class="invalid-feedback">Please select a Transaction type.</div>
+        </div>
+
+        <div class="col-md-6">
+          <label for="furnishing" class="form-label">Furnishing</label>
+          <select class="form-select" name="furnishing" id="furnishing" required>
+            <option value="" disabled selected>Select Furnishing</option>
+            <option value="Unfurnished">Unfurnished</option>
+            <option value="Semi Furnished">Semi Furnished</option>
+            <option value="Furnished">Furnished</option>
+          </select>
+          <div class="invalid-feedback">Please select Furnishing.</div>
+        </div>
+
+        <div class="col-md-6">
+          <label for="price_sqft" class="form-label">Price per sqft</label>
+          <input class="form-control" type="number" step="0.01" name="price_sqft" id="price_sqft" required />
+          <div class="invalid-feedback">Please enter Price per sqft.</div>
+        </div>
+
+        <div class="col-md-6">
+          <label for="area" class="form-label">Area</label>
+          <select class="form-select" name="area" id="area" required>
+            <option value="" disabled selected>Select Area</option>
+            {% for area in area_categories %}
+              <option value="{{ area }}">{{ area }}</option>
+            {% endfor %}
+          </select>
+          <div class="invalid-feedback">Please select an Area.</div>
+        </div>
+
+        <div class="col-md-6">
+          <label for="facing" class="form-label">Facing</label>
+          <select class="form-select" name="facing" id="facing" required>
+            <option value="" disabled selected>Select Facing</option>
+            {% for face in facing_categories %}
+              <option value="{{ face }}">{{ face }}</option>
+            {% endfor %}
+          </select>
+          <div class="invalid-feedback">Please select Facing.</div>
+        </div>
+
+        <div class="col-md-6">
+          <label for="bhk" class="form-label">BHK</label>
+          <input class="form-control" type="number" name="bhk" id="bhk" required />
+          <div class="invalid-feedback">Please enter BHK.</div>
+        </div>
+
+        <div class="col-md-6">
+          <label for="months_until_possession" class="form-label">Months until possession</label>
+          <input class="form-control" type="number" name="months_until_possession" id="months_until_possession" required />
+          <div class="invalid-feedback">Please enter Months until possession.</div>
+        </div>
+      </div>
+
+      <div class="text-center mt-4">
+        <button class="btn btn-primary btn-lg" type="submit">Predict Price</button>
+      </div>
+    </form>
+
+    {% if prediction %}
+    <div class="alert alert-success alert-dismissible fade show mt-5" role="alert">
+      <h4 class="alert-heading">Predicted Price</h4>
+      <p class="mb-0 fs-4">₹{{ '{:,.2f}'.format(prediction) }} Lakh</p>
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    {% endif %}
+  </div>
+
+  <!-- Bootstrap JS Bundle with Popper -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+  <script>
+    // Example starter JavaScript for disabling form submissions if there are invalid fields
+    (() => {
+      'use strict'
+      const forms = document.querySelectorAll('.needs-validation')
+      Array.from(forms).forEach(form => {
+        form.addEventListener('submit', event => {
+          if (!form.checkValidity()) {
+            event.preventDefault()
+            event.stopPropagation()
+          }
+          form.classList.add('was-validated')
+        }, false)
+      })
+    })()
+  </script>
+</body>
+</html>
