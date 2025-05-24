@@ -130,7 +130,6 @@ protobuf==4.21.12
 psutil==6.0.0
 pure_eval==0.2.3
 pyasn1==0.6.1
-pycairo==1.25.1
 pycparser==2.21
 pycryptodome==3.20.0
 pydantic==2.5.3
