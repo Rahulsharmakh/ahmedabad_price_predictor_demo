@@ -32,7 +32,7 @@ cycler==0.12.1
 debugpy==1.8.5
 decorator==5.1.1
 defusedxml==0.7.1
-Django==5.0.1
+Django==4.2.11
 django-admin-interface==0.28.5
 django-bootstrap-datepicker-plus==5.0.5
 django-chartit==0.2.9
